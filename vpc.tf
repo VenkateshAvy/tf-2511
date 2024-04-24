@@ -22,3 +22,10 @@ resource "aws_subnet" "ibm-db-subnet" {
     Name = "ibm-db-subnet"
   }
 }
+resource "aws_internet_gateway" "ibm-igw" {
+  vpc_id = aws_vpc.ibm-vpc.id
+
+  tags = {
+    Name = "ibm-igw"
+  }
+}
