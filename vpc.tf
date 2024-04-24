@@ -116,3 +116,35 @@ resource "aws_network_acl_association" "ibm-nacl-db-asscn" {
   network_acl_id = aws_network_acl.ibm-db-nacl.id
   subnet_id      = aws_subnet.ibm-db-subnet.id
 }
+#ibm sg
+resource "aws_security_group" "ibm-web-sg" {
+  name        = "ibm-web-sg"
+  description = "Allow SSH&HTTP  traffic"
+  vpc_id      = aws_vpc.ibm-vpc.id
+
+  tags = {
+    Name = "ibm-web-sg"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow-ssh" {
+  security_group_id = aws_security_group.ibm-web-sg.id
+  cidr_ipv4         = 0.0.0.0/0
+  from_port         = 22
+  ip_protocol       = "tcp"
+  to_port           = 22
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow-http" {
+  security_group_id = aws_security_group.ibm-web-sg.id
+  cidr_ipv4         = 0.0.0.0/0
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+
+resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
+  security_group_id = aws_security_group.ibm-web-sg.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1" # semantically equivalent to all ports
+}
