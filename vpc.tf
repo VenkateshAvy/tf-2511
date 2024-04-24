@@ -48,3 +48,11 @@ resource "aws_route_table" "ibm-db-rtb" {
     Name = "ibm-db-rtb"
   }
 }
+resource "aws_route_table_association" "ibm-web-rtb-asscn" {
+  subnet_id      = aws_subnet.ibm-web-subnet.id
+  route_table_id = aws_route_table.ibm-web-rtb.id
+}
+resource "aws_route_table_association" "ibm-db-rtb-asscn" {
+  subnet_id      = aws_subnet.ibm-db-subnet.id
+  route_table_id = aws_route_table.ibm-db-rtb.id
+}
