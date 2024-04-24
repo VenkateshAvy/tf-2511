@@ -150,7 +150,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
 }
 #ibm db sg
 resource "aws_security_group" "ibm-db-sg" {
-  name        = "ibm-web-sg"
+  name        = "ibm-db-sg"
   description = "Allow SSH&postgres traffic"
   vpc_id      = aws_vpc.ibm-vpc.id
 
