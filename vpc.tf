@@ -108,11 +108,11 @@ resource "aws_network_acl" "ibm-db-nacl" {
     Name = "ibm-db-nacl"
   }
 }
-resource "aws_network_acl_association" "ibm-nacl-asscn" {
+resource "aws_network_acl_association" "ibm-nacl-web-asscn" {
   network_acl_id = aws_network_acl.ibm-web-nacl.id
   subnet_id      = aws_subnet.ibm-web-subnet.id
 }
-resource "aws_network_acl_association" "ibm-nacl-asscn" {
+resource "aws_network_acl_association" "ibm-nacl-db-asscn" {
   network_acl_id = aws_network_acl.ibm-db-nacl.id
   subnet_id      = aws_subnet.ibm-db-subnet.id
 }
